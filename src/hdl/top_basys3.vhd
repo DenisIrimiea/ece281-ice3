@@ -68,7 +68,6 @@ end top_basys3;
 
 architecture top_basys3_arch of top_basys3 is
     
-    -- Declare the halfAdder component
     component halfAdder is
         port(
             i_A     : in std_logic;
@@ -78,11 +77,9 @@ architecture top_basys3_arch of top_basys3 is
         );
     end component;
 
-    -- Declare any signals you will need
     signal w_S1, w_Cout1, w_Cout2: std_logic;
 
 begin
-    -- PORT MAPS for two halfAdder instances
     halfAdder1_inst: halfAdder
     port map(
         i_A     => sw(0),
@@ -99,7 +96,6 @@ begin
         o_Cout  => w_Cout2
     );
 
-    -- CONCURRENT STATEMENTS for combining carry outputs
     led(1) <= w_Cout1 or w_Cout2;
 
 end top_basys3_arch;

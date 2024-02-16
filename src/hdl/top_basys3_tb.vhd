@@ -55,7 +55,6 @@ entity top_basys3_tb is
 end top_basys3_tb;
 
 architecture test_bench of top_basys3_tb is 
-    -- Declare the component of your top-level design unit under test (UUT)
     component top_basys3 is
         port(
             sw  : in  std_logic_vector(2 downto 0);
@@ -63,57 +62,43 @@ architecture test_bench of top_basys3_tb is
         );
     end component;
   
-    -- Declare signals needed to stimulate the UUT inputs
     signal w_sw  : std_logic_vector(2 downto 0);
     signal w_led : std_logic_vector(1 downto 0);
     
 begin
-    -- PORT MAPS ----------------------------------------
-    -- Instantiate the Unit Under Test (UUT)
+
     top_basys3_inst : top_basys3 port map (
        sw => w_sw,
        led => w_led
     );
     
-    -- PROCESSES ----------------------------------------    
-    -- Test Plan Process
     test_process : process 
     begin
-        -- Test case 1: 000 -> Sum = 0, Carry = 0
         w_sw <= "000"; wait for 10 ns;
         assert w_led = "00" report "bad 000" severity failure;
         
-        -- Test case 2: 001 -> Sum = 1, Carry = 0
         w_sw <= "001"; wait for 10 ns;
         assert w_led = "01" report "bad 001" severity failure;
         
-        -- Add the remaining test cases based on the full adder logic
-        -- Test case 3: 010 -> Sum = 1, Carry = 0
         w_sw <= "010"; wait for 10 ns;
         assert w_led = "01" report "bad 010" severity failure;
         
-        -- Test case 4: 011 -> Sum = 0, Carry = 1
         w_sw <= "011"; wait for 10 ns;
         assert w_led = "10" report "bad 011" severity failure;
         
-        -- Test case 5: 100 -> Sum = 1, Carry = 0
         w_sw <= "100"; wait for 10 ns;
         assert w_led = "01" report "bad 100" severity failure;
         
-        -- Test case 6: 101 -> Sum = 0, Carry = 1
         w_sw <= "101"; wait for 10 ns;
         assert w_led = "10" report "bad 101" severity failure;
         
-        -- Test case 7: 110 -> Sum = 0, Carry = 1
         w_sw <= "110"; wait for 10 ns;
         assert w_led = "10" report "bad 110" severity failure;
         
-        -- Test case 8: 111 -> Sum = 1, Carry = 1
         w_sw <= "111"; wait for 10 ns;
         assert w_led = "11" report "bad 111" severity failure;
         
-        -- End of tests
-        wait; -- wait forever
+        wait; 
     end process;
 end test_bench;
 
